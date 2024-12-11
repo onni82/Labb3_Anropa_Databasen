@@ -28,7 +28,8 @@ namespace Labb3_Anropa_Databasen
                 {
                     case "1":
                         Console.WriteLine("");
-                        // Get staff (can be solved with ADO.NET and SQL, otherwise EntityFramework)
+
+                        // Display staff
                         // The user can choose whether he wants to see all employees, or only within one of the categories, such as teachers
                         using (var context = new SchoolContext())
                         {
@@ -43,7 +44,6 @@ namespace Labb3_Anropa_Databasen
 
                             Console.WriteLine("Which role do you want to see? Type a corresponding number, or 0 to view all staff.");
                             string? roleChoice = Console.ReadLine();
-                            //Console.WriteLine("");
 
                             if (roleChoice == "0")
                             {
@@ -58,7 +58,9 @@ namespace Labb3_Anropa_Databasen
                                     }
                                 }
                             }
+
                             // Checks the user's choice is an existing role
+                            // First it tries to parse the choice before checking
                             else if (int.TryParse(roleChoice, out int roleChoiceInt) && roles.Any(r => r.RoleId == roleChoiceInt))
                             {
                                 var staff = context.Staff.Where(s => s.RoleId == int.Parse(roleChoice)).ToList();
@@ -77,42 +79,131 @@ namespace Labb3_Anropa_Databasen
                         break;
                     case "2":
                         Console.WriteLine("");
-                        // Get all students (to be solved with EntityFramework)
-                        // The user can choose whether they want to see the students sorted by first or last name and whether it should be sorted in ascending or descending order.
+
+                        /* Display all students.
+                         * The user can choose whether they want to see the students
+                         * sorted by first or last name and whether it should be
+                         * sorted in ascending or descending order.
+                         */
+                        using (var context = new SchoolContext())
+                        {
+                            Console.WriteLine("Do you want to sort the students by first or last name?");
+                            Console.WriteLine("1. First name");
+                            Console.WriteLine("2. Last name");
+                            string? sortChoice = Console.ReadLine();
+                            switch(sortChoice)
+                            {
+                                // Sort students by first name
+                                case "1":
+                                    Console.WriteLine("Do you want to sort the students in ascending or descending order?");
+                                    Console.WriteLine("1. Ascending");
+                                    Console.WriteLine("2. Descending");
+                                    string? firstNameOrderChoice = Console.ReadLine();
+                                    switch(firstNameOrderChoice)
+                                    {
+                                        // Sort students by first name, ascending
+                                        case "1":
+                                            var students = context.Students.OrderBy(s => s.FirstName).ToList();
+                                            foreach (var student in students)
+                                            {
+                                                Console.WriteLine(student.FirstName + " " + student.LastName);
+                                            }
+                                            break;
+                                        // Sort students by first name, descending
+                                        case "2":
+                                            var students2 = context.Students.OrderByDescending(s => s.FirstName).ToList();
+                                            foreach (var student in students2)
+                                            {
+                                                Console.WriteLine(student.FirstName + " " + student.LastName);
+                                            }
+                                            break;
+                                        default:
+                                            Console.WriteLine("Invalid choice");
+                                            break;
+                                    }
+                                    break;
+                                // Sort students by last name
+                                case "2":
+                                    Console.WriteLine("Do you want to sort the students in ascending or descending order?");
+                                    Console.WriteLine("1. Ascending");
+                                    Console.WriteLine("2. Descending");
+                                    string? orderChoice = Console.ReadLine();
+                                    switch (orderChoice)
+                                    {
+                                        // Sort students by last name, ascending
+                                        case "1":
+                                            var students = context.Students.OrderBy(s => s.FirstName).ToList();
+                                            foreach (var student in students)
+                                            {
+                                                Console.WriteLine(student.FirstName + " " + student.LastName);
+                                            }
+                                            break;
+                                        // Sort students by last name, descending
+                                        case "2":
+                                            var students2 = context.Students.OrderByDescending(s => s.FirstName).ToList();
+                                            foreach (var student in students2)
+                                            {
+                                                Console.WriteLine(student.FirstName + " " + student.LastName);
+                                            }
+                                            break;
+                                        default:
+                                            Console.WriteLine("Invalid choice");
+                                            break;
+                                    }
+                                    break;
+                                default:
+                                    Console.WriteLine("Invalid choice");
+                                    break;
+
+                            }
+                        }
                         
                         Console.WriteLine("");
                         break;
                     case "3":
                         Console.WriteLine("");
-                        // Get all students in a certain class (to be solved with EntityFramework)
-                        // The user must first see a list of all the classes that exist, then the user can choose one of the classes and then all the students in that class will be printed.
-                        
+                        /* Display all students in a certain class.
+                         * The user must first see a list of all the classes that exist,
+                         * then the user can choose one of the classes and then
+                         * all the students in that class will be printed.
+                         */
+
                         Console.WriteLine("");
                         break;
                     case "4":
                         Console.WriteLine("");
-                        // Get all grades set in the last month (can be solved with ADO.NET and SQL, otherwise EntityFramework)
-                        // Here, the user immediately gets a list of all the grades set in the last month, where the student's name, the name of the course and the grade appear.
-                        
+                        /* Display all grades set in the last month.
+                         * The user immediately gets a list of all the grades set in the last month,
+                         * where the student's name, the name of the course and the grade appear.
+                         */
+
                         Console.WriteLine("");
                         break;
                     case "5":
                         Console.WriteLine("");
-                        // Get a list of all courses and the average grade that the students got in that course as well as the highest and lowest grade that someone got in the course (can be solved with ADO.NET and SQL, otherwise Entity framework)
-                        // Here, the user immediately gets a list of all courses in the database, the average grade and the highest and lowest grade for each course.
-                        
+                        /* Display a list of all courses and the average grade
+                         * that the students got in that course as well as the highest
+                         * and lowest grade that someone got in the course.
+                         * The user immediately gets a list of all courses in the database,
+                         * the average grade and the highest and lowest grade for each course.
+                         */
+
                         Console.WriteLine("");
                         break;
                     case "6":
                         Console.WriteLine("");
-                        // Add new students (can be solved with ADO.NET and SQL, otherwise EntityFramework)
-                        // The user gets the opportunity to enter information about a new student and that data is then saved in the database.
+                        /* Add a new student
+                         * The user gets the opportunity to enter information about
+                         * a new student and that data is then saved in the database.
+                         */
 
                         break;
                     case "7":
                         Console.WriteLine("");
-                        // Add new staff (to be solved through the Entity framework)
-                        // The user gets the opportunity to enter information about a new employee and that data is then saved in the database.
+                        /* Add new staff.
+                         * The user gets the opportunity to enter information about
+                         * a new employee and that data is then saved in the database.
+                         */
 
                         Console.WriteLine("");
                         break;

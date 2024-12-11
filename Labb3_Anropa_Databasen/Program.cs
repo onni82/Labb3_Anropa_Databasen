@@ -11,19 +11,12 @@ namespace Labb3_Anropa_Databasen
             while (true)
             {
                 Console.WriteLine("Want do you want to do?");
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("1. Display staff");
-                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("2. Display all students");
-                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("3. Display all students in a class");
-                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("4. Display all grades this month");
-                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("5. Display all grades for a course");
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("6. Add a new student");
-                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("7. Add new staff");
                 Console.ResetColor();
                 Console.WriteLine("8. Exit application");

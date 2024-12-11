@@ -29,7 +29,6 @@ namespace Labb3_Anropa_Databasen
                 Console.WriteLine("8. Exit application");
 
                 string choice = Console.ReadLine();
-                Console.WriteLine("");
 
                 // A switch case that handles the user's choice
                 switch (choice)

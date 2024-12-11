@@ -21,7 +21,7 @@ namespace Labb3_Anropa_Databasen
                 Console.ResetColor();
                 Console.WriteLine("8. Exit application");
 
-                string choice = Console.ReadLine();
+                string? choice = Console.ReadLine();
 
                 // A switch case that handles the user's choice
                 switch (choice)
@@ -42,20 +42,24 @@ namespace Labb3_Anropa_Databasen
                             }
 
                             Console.WriteLine("Which role do you want to see? Type a corresponding number, or 0 to view all staff.");
-                            string roleChoice = Console.ReadLine();
-                            Console.WriteLine("");
+                            string? roleChoice = Console.ReadLine();
+                            //Console.WriteLine("");
 
                             if (roleChoice == "0")
                             {
-                                var staff = context.Staff.OrderBy(s => s.Role.RoleName).ToList();
-                                
-                                foreach (var s in staff)
+                                IEnumerable<IGrouping<string?, Staff>> staffByRole = context.Staff.GroupBy(s => s.Role.RoleName);
+                                foreach (var group in staffByRole)
                                 {
-                                    Console.WriteLine($"{s.Role.RoleName}: {s.FirstName} {s.LastName}");
+                                    Console.WriteLine("");
+                                    Console.WriteLine($"{group.Key}:");
+                                    foreach (var s in group)
+                                    {
+                                        Console.WriteLine($"{s.FirstName} {s.LastName}");
+                                    }
                                 }
                             }
                             // Checks the user's choice is an existing role
-                            else if (roles.Any(r => r.RoleId == int.Parse(roleChoice)))
+                            else if (int.TryParse(roleChoice, out int roleChoiceInt) && roles.Any(r => r.RoleId == roleChoiceInt))
                             {
                                 var staff = context.Staff.Where(s => s.RoleId == int.Parse(roleChoice)).ToList();
                                 foreach (var s in staff)

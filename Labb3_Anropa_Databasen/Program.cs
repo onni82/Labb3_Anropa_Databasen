@@ -167,6 +167,40 @@ namespace Labb3_Anropa_Databasen
                          * then the user can choose one of the classes and then
                          * all the students in that class will be printed.
                          */
+                        using (var context = new SchoolContext())
+                        {
+                            // Prints a list of all courses
+                            var classes = context.Courses.ToList();
+                            foreach (var c in classes)
+                            {
+                                Console.WriteLine(c.CourseId + ". " + c.CourseName);
+                            }
+
+                            Console.WriteLine("Which class do you want to see? Type a corresponding number.");
+                            string? classChoice = Console.ReadLine();
+                            // Tries to parse the choice and checks if any courses can be found with that ID
+                            if (int.TryParse(classChoice, out int classChoiceInt) && classes.Any(c => c.CourseId == classChoiceInt))
+                            {
+                                // Selects all the students where their enrolment course ID equals to user choice
+                                var studentsInCourse = context.Enrolments
+                                    .Where(e => e.CourseId == classChoiceInt)
+                                    .Select(e => e.Student)
+                                    .ToList();
+
+                                string courseName = classes.First(c => c.CourseId == classChoiceInt).CourseName;
+                                Console.WriteLine($"Students in {courseName}:");
+
+                                // Prints all the students
+                                foreach (var student in studentsInCourse)
+                                {
+                                    Console.WriteLine($"{student.FirstName} {student.LastName}");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid choice");
+                            }
+                        }
 
                         Console.WriteLine("");
                         break;

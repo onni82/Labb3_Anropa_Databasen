@@ -4,8 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-            // Skapa en enkel navigation i programmet som gör att användaren kan välja mellan följande funktioner.
+            // A simple navigation in the program that allows the user to choose between the following functions.
             while (true)
             {
                 Console.WriteLine("Want do you want to do?");
@@ -16,27 +15,51 @@
                 Console.WriteLine("5. Get all grades for a course");
                 Console.WriteLine("6. Add new student");
                 Console.WriteLine("7. Add new teacher");
-                // Hämta personal (kan lösas med ADO.NET och SQL, annars EntityFramework)
-                // Användaren får välja om denna vill se alla anställda, eller bara inom en av kategorierna så som ex lärare
 
+                string choice = Console.ReadLine();
 
-                // Hämta alla elever (ska lösas med EntityFramework)
-                // Användaren får välja om de vill se eleverna sorterade på för- eller efternamn och om det ska vara stigande eller fallande sortering.
+                // A switch case that handles the user's choice
+                switch (choice)
+                {
+                    case "1":
+                        // Get staff (can be solved with ADO.NET and SQL, otherwise EntityFramework)
+                        // The user can choose whether he wants to see all employees, or only within one of the categories, such as teachers
 
-                // Hämta alla elever i en viss klass (ska lösas med EntityFramework)
-                // Användaren ska först få se en lista med alla klasser som finns, sedan får användaren välja en av klasserna och då skrivs alla elever i den klassen ut.
+                        break;
+                    case "2":
+                        // Get all students (to be solved with EntityFramework)
+                        // The user can choose whether they want to see the students sorted by first or last name and whether it should be sorted in ascending or descending order.
 
-                // Hämta alla betyg som satts den senaste månaden (kan lösas med ADO.NET och SQL, annars EntityFramework)
-                // Här får användaren direkt en lista med alla betyg som satts senaste månaden där elevens namn, kursens namn och betyget framgår.
+                        break;
+                    case "3":
+                        // Get all students in a certain class (to be solved with EntityFramework)
+                        // The user must first see a list of all the classes that exist, then the user can choose one of the classes and then all the students in that class will be printed.
 
-                // Hämta en lista med alla kurser och det snittbetyg som eleverna fått på den kursen samt det högsta och lägsta betyget som någon fått i kursen (kan lösas med ADO.NET och SQL, annars Entity framework)
-                // Här får användaren direkt upp en lista med alla kurser i databasen, snittbetyget samt det högsta och lägsta betyget för varje kurs.
+                        break;
+                    case "4":
+                        // Get all grades set in the last month (can be solved with ADO.NET and SQL, otherwise EntityFramework)
+                        // Here, the user immediately gets a list of all the grades set in the last month, where the student's name, the name of the course and the grade appear.
 
-                // Lägga till nya elever (kan lösas med ADO.NET och SQL, annars EntityFramework)
-                // Användaren får möjlighet att mata in uppgifter om en ny elev och den datan sparas då ner i databasen.
+                        break;
+                    case "5":
+                        // Get a list of all courses and the average grade that the students got in that course as well as the highest and lowest grade that someone got in the course (can be solved with ADO.NET and SQL, otherwise Entity framework)
+                        // Here, the user immediately gets a list of all courses in the database, the average grade and the highest and lowest grade for each course.
 
-                // Lägga till ny personal (ska lösas genom Entity framework)
-                // Användaren får möjlighet att mata in uppgifter om en ny anställd och den data sparas då ner i databasen.
+                        break;
+                    case "6":
+                        // Add new students (can be solved with ADO.NET and SQL, otherwise EntityFramework)
+                        // The user gets the opportunity to enter information about a new student and that data is then saved in the database.
+
+                        break;
+                    case "7":
+                        // Add new staff (to be solved through the Entity framework)
+                        // The user gets the opportunity to enter information about a new employee and that data is then saved in the database.
+
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice");
+                        break;
+                }
             }
         }
     }

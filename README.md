@@ -10,7 +10,7 @@ Denna labb bygger vidare på labb 2 och du ska alltså jobba vidare med samma da
 - [ ]  Fyll på din databas från labb 2 med lite mer exempeldata i alla tabeller.
 - [ ]  Skapa ett nytt console-program i C#
 - [ ]  Skapa en enkel navigation i programmet som gör att användaren kan välja mellan följande funktioner.
-    - [ ]  Hämta personal (kan lösas med [ADO.NET](http://ADO.NET) och SQL, annars Entity framework)
+    - [ ]  Hämta personal (kan lösas med ADO.NET och SQL, annars Entity framework)
         
         Användaren får välja om denna vill se alla anställda, eller bara inom en av kategorierna så som ex lärare.
         
@@ -24,32 +24,30 @@ Denna labb bygger vidare på labb 2 och du ska alltså jobba vidare med samma da
         
         🏆 Extra utmaning (Frivillig): låt användaren även få välja sortering på eleverna som i punkten ovan.
         
-    - [ ]  Hämta alla betyg som satts den senaste månaden (kan lösas med [ADO.NET](http://ADO.NET) och SQL, annars Entity framework)
+    - [ ]  Hämta alla betyg som satts den senaste månaden (kan lösas med ADO.NET och SQL, annars Entity framework)
         
         Här får användaren direkt en lista med alla betyg som satts senaste månaden där elevens namn, kursens namn och betyget framgår.
         
-    - [ ]  Hämta en lista med alla kurser och det snittbetyg som eleverna fått på den kursen samt det högsta och lägsta betyget som någon fått i kursen (kan lösas med [ADO.NET](http://ADO.NET) och SQL, annars Entity framework)
+    - [ ]  Hämta en lista med alla kurser och det snittbetyg som eleverna fått på den kursen samt det högsta och lägsta betyget som någon fått i kursen (kan lösas med ADO.NET och SQL, annars Entity framework)
         
         Här får användaren direkt upp en lista med alla kurser i databasen, snittbetyget samt det högsta och lägsta betyget för varje kurs.
         
         💡 Tips: Det kan vara svårt att göra detta med betyg i form av bokstäver så du kan välja att lagra betygen som siffror istället.
         
-    - [ ]  Lägga till nya elever (kan lösas med [ADO.NET](http://ADO.NET) och SQL, annars Entity framework)
+    - [ ]  Lägga till nya elever (kan lösas med ADO.NET och SQL, annars Entity framework)
         
         Användaren får möjlighet att mata in uppgifter om en ny elev och den datan sparas då ner i databasen.
         
     - [ ]  Lägga till ny personal (ska lösas genom Entity framework)
         
         Användaren får möjlighet att mata in uppgifter om en ny anställd och den data sparas då ner i databasen.
-        
 
-<aside>
 👉 **Extrautmaningar**
 
 - Kontrollera att personnumren är giltiga genom SQL.
 - Bygg en view för att hämta betyg som satts den senaste månaden.
 - Bygg ytterligare en funktion för användaren där det går att få fram snittbetyget baserat dels på kön och dels på åldersgrupp/årskull sett till snittet för alla kurser de läst.
-</aside>
+
 
 # Din inlämning
 

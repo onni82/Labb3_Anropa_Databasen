@@ -91,7 +91,8 @@ namespace Labb3_Anropa_Databasen
                             Console.WriteLine("1. First name");
                             Console.WriteLine("2. Last name");
                             string? sortChoice = Console.ReadLine();
-                            switch(sortChoice)
+                            Console.WriteLine("");
+                            switch (sortChoice)
                             {
                                 // Sort students by first name
                                 case "1":
@@ -99,7 +100,8 @@ namespace Labb3_Anropa_Databasen
                                     Console.WriteLine("1. Ascending");
                                     Console.WriteLine("2. Descending");
                                     string? firstNameOrderChoice = Console.ReadLine();
-                                    switch(firstNameOrderChoice)
+                                    Console.WriteLine("");
+                                    switch (firstNameOrderChoice)
                                     {
                                         // Sort students by first name, ascending
                                         case "1":
@@ -128,11 +130,12 @@ namespace Labb3_Anropa_Databasen
                                     Console.WriteLine("1. Ascending");
                                     Console.WriteLine("2. Descending");
                                     string? orderChoice = Console.ReadLine();
+                                    Console.WriteLine("");
                                     switch (orderChoice)
                                     {
                                         // Sort students by last name, ascending
                                         case "1":
-                                            var students = context.Students.OrderBy(s => s.FirstName).ToList();
+                                            var students = context.Students.OrderBy(s => s.LastName).ToList();
                                             foreach (var student in students)
                                             {
                                                 Console.WriteLine(student.FirstName + " " + student.LastName);
@@ -140,7 +143,7 @@ namespace Labb3_Anropa_Databasen
                                             break;
                                         // Sort students by last name, descending
                                         case "2":
-                                            var students2 = context.Students.OrderByDescending(s => s.FirstName).ToList();
+                                            var students2 = context.Students.OrderByDescending(s => s.LastName).ToList();
                                             foreach (var student in students2)
                                             {
                                                 Console.WriteLine(student.FirstName + " " + student.LastName);
@@ -154,7 +157,6 @@ namespace Labb3_Anropa_Databasen
                                 default:
                                     Console.WriteLine("Invalid choice");
                                     break;
-
                             }
                         }
                         

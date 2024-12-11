@@ -6,27 +6,30 @@
         {
             Console.WriteLine("Hello, World!");
             // Skapa en enkel navigation i programmet som gör att användaren kan välja mellan följande funktioner.
-            // Hämta personal (kan lösas med ADO.NET och SQL, annars EntityFramework)
-            // Användaren får välja om denna vill se alla anställda, eller bara inom en av kategorierna så som ex lärare
+            while (true)
+            {
+                // Hämta personal (kan lösas med ADO.NET och SQL, annars EntityFramework)
+                // Användaren får välja om denna vill se alla anställda, eller bara inom en av kategorierna så som ex lärare
 
-            // Hämta alla elever (ska lösas med EntityFramework)
-            // Användaren får välja om de vill se eleverna sorterade på för- eller efternamn och om det ska vara stigande eller fallande sortering.
 
-            // Hämta alla elever i en viss klass (ska lösas med EntityFramework)
-            // Användaren ska först få se en lista med alla klasser som finns, sedan får användaren välja en av klasserna och då skrivs alla elever i den klassen ut.
+                // Hämta alla elever (ska lösas med EntityFramework)
+                // Användaren får välja om de vill se eleverna sorterade på för- eller efternamn och om det ska vara stigande eller fallande sortering.
 
-            // Hämta alla betyg som satts den senaste månaden (kan lösas med ADO.NET och SQL, annars EntityFramework)
-            // Här får användaren direkt en lista med alla betyg som satts senaste månaden där elevens namn, kursens namn och betyget framgår.
+                // Hämta alla elever i en viss klass (ska lösas med EntityFramework)
+                // Användaren ska först få se en lista med alla klasser som finns, sedan får användaren välja en av klasserna och då skrivs alla elever i den klassen ut.
 
-            // Hämta en lista med alla kurser och det snittbetyg som eleverna fått på den kursen samt det högsta och lägsta betyget som någon fått i kursen (kan lösas med ADO.NET och SQL, annars Entity framework)
-            // Här får användaren direkt upp en lista med alla kurser i databasen, snittbetyget samt det högsta och lägsta betyget för varje kurs.
+                // Hämta alla betyg som satts den senaste månaden (kan lösas med ADO.NET och SQL, annars EntityFramework)
+                // Här får användaren direkt en lista med alla betyg som satts senaste månaden där elevens namn, kursens namn och betyget framgår.
 
-            // Lägga till nya elever (kan lösas med ADO.NET och SQL, annars EntityFramework)
-            // Användaren får möjlighet att mata in uppgifter om en ny elev och den datan sparas då ner i databasen.
+                // Hämta en lista med alla kurser och det snittbetyg som eleverna fått på den kursen samt det högsta och lägsta betyget som någon fått i kursen (kan lösas med ADO.NET och SQL, annars Entity framework)
+                // Här får användaren direkt upp en lista med alla kurser i databasen, snittbetyget samt det högsta och lägsta betyget för varje kurs.
 
-            // Lägga till ny personal (ska lösas genom Entity framework)
-            // Användaren får möjlighet att mata in uppgifter om en ny anställd och den data sparas då ner i databasen.
+                // Lägga till nya elever (kan lösas med ADO.NET och SQL, annars EntityFramework)
+                // Användaren får möjlighet att mata in uppgifter om en ny elev och den datan sparas då ner i databasen.
 
+                // Lägga till ny personal (ska lösas genom Entity framework)
+                // Användaren får möjlighet att mata in uppgifter om en ny anställd och den data sparas då ner i databasen.
+            }
         }
     }
 }

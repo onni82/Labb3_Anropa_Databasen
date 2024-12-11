@@ -8,6 +8,14 @@
             // Skapa en enkel navigation i programmet som gör att användaren kan välja mellan följande funktioner.
             while (true)
             {
+                Console.WriteLine("Want do you want to do?");
+                Console.WriteLine("1. Get all teachers");
+                Console.WriteLine("2. Get all students");
+                Console.WriteLine("3. Get all students in a class");
+                Console.WriteLine("4. Get all grades this month");
+                Console.WriteLine("5. Get all grades for a course");
+                Console.WriteLine("6. Add new student");
+                Console.WriteLine("7. Add new teacher");
                 // Hämta personal (kan lösas med ADO.NET och SQL, annars EntityFramework)
                 // Användaren får välja om denna vill se alla anställda, eller bara inom en av kategorierna så som ex lärare
 

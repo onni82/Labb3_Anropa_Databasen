@@ -334,20 +334,22 @@ namespace Labb3_Anropa_Databasen
                     // Grade to numeric mapping
                     Dictionary<string, int> gradeToPoints = new Dictionary<string, int>
                     {
-                        { "A", 4 },
-                        { "B", 3 },
-                        { "C", 2 },
-                        { "D", 1 },
+                        { "A", 5 },
+                        { "B", 4 },
+                        { "C", 3 },
+                        { "D", 2 },
+                        { "E", 1 },
                         { "F", 0 }
                     };
 
                     // Numeric to grade mapping
                     Dictionary<int, string> pointsToGrade = new Dictionary<int, string>
                     {
-                        { 4, "A" },
-                        { 3, "B" },
-                        { 2, "C" },
-                        { 1, "D" },
+                        { 5, "A" },
+                        { 4, "B" },
+                        { 3, "C" },
+                        { 2, "D" },
+                        { 1, "E" },
                         { 0, "F" }
                     };
 

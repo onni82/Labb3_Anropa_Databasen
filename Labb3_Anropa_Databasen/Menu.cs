@@ -310,6 +310,7 @@ namespace Labb3_Anropa_Databasen
              * The user immediately gets a list of all courses in the database,
              * the average grade and the highest and lowest grade for each course.
              */
+            DisplayAllCourses();
             using (var context = new SchoolContext())
             {
                 // Makes a list of all grades from a specific course

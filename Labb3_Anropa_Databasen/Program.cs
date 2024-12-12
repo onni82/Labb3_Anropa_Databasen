@@ -225,6 +225,9 @@ namespace Labb3_Anropa_Databasen
                          */
                         using (var context = new SchoolContext())
                         {
+                            // Sample list of grades
+                            List<char> grades = new List<char> { 'A', 'B', 'A', 'C', 'B', 'F', 'A' };
+
                             // Grade to numeric mapping
                             Dictionary<char, int> gradeToPoints = new Dictionary<char, int>
                             {
@@ -244,6 +247,20 @@ namespace Labb3_Anropa_Databasen
                                 { 1, 'D' },
                                 { 0, 'F' }
                             };
+
+                            // Calculate the average points
+                            double averagePoints = grades
+                                .Where(grade => gradeToPoints.ContainsKey(grade)) // Ensure valid grades
+                                .Select(grade => gradeToPoints[grade]) // Convert grades to points
+                                .Average();
+
+                            Console.WriteLine($"Average Points: {averagePoints:F2}");
+
+                            // Convert back to a grade if needed (round to the nearest whole number)
+                            int roundedPoints = (int)Math.Round(averagePoints);
+                            char averageGrade = pointsToGrade.ContainsKey(roundedPoints) ? pointsToGrade[roundedPoints] : '?';
+
+                            Console.WriteLine($"Average Grade: {averageGrade}");
                         }
 
                         Console.WriteLine("");

@@ -234,6 +234,16 @@ namespace Labb3_Anropa_Databasen
                                 { 'D', 1 },
                                 { 'F', 0 }
                             };
+
+                            // Numeric to grade mapping
+                            Dictionary<int, char> pointsToGrade = new Dictionary<int, char>
+                            {
+                                { 4, 'A' },
+                                { 3, 'B' },
+                                { 2, 'C' },
+                                { 1, 'D' },
+                                { 0, 'F' }
+                            };
                         }
 
                         Console.WriteLine("");

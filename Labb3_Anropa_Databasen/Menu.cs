@@ -237,9 +237,9 @@ namespace Labb3_Anropa_Databasen
              * then the user can choose one of the classes and then
              * all the students in that class will be printed.
              */
+            DisplayAllCourses();
             using (var context = new SchoolContext())
             {
-                DisplayAllCourses();
                 Console.WriteLine("Which class do you want to see? Type a corresponding number.");
                 string? classChoice = Console.ReadLine();
                 Console.WriteLine("");

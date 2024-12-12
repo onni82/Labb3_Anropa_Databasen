@@ -218,6 +218,18 @@ namespace Labb3_Anropa_Databasen
                 }
             }
         }
+        public static void DisplayAllCourses()
+        {
+            using (var context = new SchoolContext())
+            {
+                // Prints a list of all courses
+                var courses = context.Courses.ToList();
+                foreach (var c in courses)
+                {
+                    Console.WriteLine(c.CourseId + ". " + c.CourseName);
+                }
+            }
+        }
         public static void DisplayStudentsInCourse()
         {
             /* Display all students in a certain class.
@@ -227,13 +239,7 @@ namespace Labb3_Anropa_Databasen
              */
             using (var context = new SchoolContext())
             {
-                // Prints a list of all courses
-                var classes = context.Courses.ToList();
-                foreach (var c in classes)
-                {
-                    Console.WriteLine(c.CourseId + ". " + c.CourseName);
-                }
-
+                DisplayAllCourses();
                 Console.WriteLine("Which class do you want to see? Type a corresponding number.");
                 string? classChoice = Console.ReadLine();
                 Console.WriteLine("");

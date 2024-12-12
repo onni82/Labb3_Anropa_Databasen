@@ -102,8 +102,10 @@ namespace Labb3_Anropa_Databasen
                 Console.WriteLine("Which role do you want to see? Type a corresponding number, or 0 to view all staff.");
                 string? roleChoice = Console.ReadLine();
 
+                // Views all staff
                 if (roleChoice == "0")
                 {
+                    //Groups staff by role names
                     IEnumerable<IGrouping<string?, Staff>> staffByRole = context.Staff.GroupBy(s => s.Role.RoleName);
                     foreach (var group in staffByRole)
                     {

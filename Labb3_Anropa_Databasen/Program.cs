@@ -223,6 +223,18 @@ namespace Labb3_Anropa_Databasen
                          * The user immediately gets a list of all courses in the database,
                          * the average grade and the highest and lowest grade for each course.
                          */
+                        using (var context = new SchoolContext())
+                        {
+                            // Grade to numeric mapping
+                            Dictionary<char, int> gradeToPoints = new Dictionary<char, int>
+                            {
+                                { 'A', 4 },
+                                { 'B', 3 },
+                                { 'C', 2 },
+                                { 'D', 1 },
+                                { 'F', 0 }
+                            };
+                        }
 
                         Console.WriteLine("");
                         break;

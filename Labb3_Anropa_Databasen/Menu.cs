@@ -54,55 +54,7 @@ namespace Labb3_Anropa_Databasen
                         break;
                     case "5":
                         Console.WriteLine("");
-                        /* Display a list of all courses and the average grade
-                         * that the students got in that course as well as the highest
-                         * and lowest grade that someone got in the course.
-                         * The user immediately gets a list of all courses in the database,
-                         * the average grade and the highest and lowest grade for each course.
-                         */
-                        using (var context = new SchoolContext())
-                        {
-                            // Makes a list of all grades from a specific course
-                            var grades = context.Enrolments
-                                .Where(e => e.CourseId == 1)
-                                .Select(e => e.Grade)
-                                .ToList();
-
-                            // Grade to numeric mapping
-                            Dictionary<string, int> gradeToPoints = new Dictionary<string, int>
-                            {
-                                { "A", 4 },
-                                { "B", 3 },
-                                { "C", 2 },
-                                { "D", 1 },
-                                { "F", 0 }
-                            };
-
-                            // Numeric to grade mapping
-                            Dictionary<int, string> pointsToGrade = new Dictionary<int, string>
-                            {
-                                { 4, "A" },
-                                { 3, "B" },
-                                { 2, "C" },
-                                { 1, "D" },
-                                { 0, "F" }
-                            };
-
-                            // Calculate the average points
-                            double averagePoints = grades
-                                .Where(grade => gradeToPoints.ContainsKey(grade)) // Ensure valid grades
-                                .Select(grade => gradeToPoints[grade]) // Convert grades to points
-                                .Average();
-
-                            Console.WriteLine($"Average Points: {averagePoints:F2}");
-
-                            // Convert back to a grade if needed (round to the nearest whole number)
-                            int roundedPoints = (int)Math.Round(averagePoints);
-                            string averageGrade = pointsToGrade.ContainsKey(roundedPoints) ? pointsToGrade[roundedPoints] : "?";
-
-                            Console.WriteLine($"Average Grade: {averageGrade}");
-                        }
-
+                        DisplayGradesFromCourse();
                         Console.WriteLine("");
                         break;
                     case "6":
@@ -339,6 +291,57 @@ namespace Labb3_Anropa_Databasen
                         Console.WriteLine($"{grade.Student.FirstName} {grade.Student.LastName} - {grade.Course.CourseName}: {grade.Grade}. Graded on {grade.GradeDate:D}");
                     }
                 }
+            }
+        }
+        public static void DisplayGradesFromCourse()
+        {
+            /* Display a list of all courses and the average grade
+             * that the students got in that course as well as the highest
+             * and lowest grade that someone got in the course.
+             * The user immediately gets a list of all courses in the database,
+             * the average grade and the highest and lowest grade for each course.
+             */
+            using (var context = new SchoolContext())
+            {
+                // Makes a list of all grades from a specific course
+                var grades = context.Enrolments
+                    .Where(e => e.CourseId == 1)
+                    .Select(e => e.Grade)
+                    .ToList();
+
+                // Grade to numeric mapping
+                Dictionary<string, int> gradeToPoints = new Dictionary<string, int>
+                            {
+                                { "A", 4 },
+                                { "B", 3 },
+                                { "C", 2 },
+                                { "D", 1 },
+                                { "F", 0 }
+                            };
+
+                // Numeric to grade mapping
+                Dictionary<int, string> pointsToGrade = new Dictionary<int, string>
+                            {
+                                { 4, "A" },
+                                { 3, "B" },
+                                { 2, "C" },
+                                { 1, "D" },
+                                { 0, "F" }
+                            };
+
+                // Calculate the average points
+                double averagePoints = grades
+                    .Where(grade => gradeToPoints.ContainsKey(grade)) // Ensure valid grades
+                    .Select(grade => gradeToPoints[grade]) // Convert grades to points
+                    .Average();
+
+                Console.WriteLine($"Average Points: {averagePoints:F2}");
+
+                // Convert back to a grade if needed (round to the nearest whole number)
+                int roundedPoints = (int)Math.Round(averagePoints);
+                string averageGrade = pointsToGrade.ContainsKey(roundedPoints) ? pointsToGrade[roundedPoints] : "?";
+
+                Console.WriteLine($"Average Grade: {averageGrade}");
             }
         }
     }

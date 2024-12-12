@@ -44,48 +44,7 @@ namespace Labb3_Anropa_Databasen
                         break;
                     case "3":
                         Console.WriteLine("");
-                        /* Display all students in a certain class.
-                         * The user must first see a list of all the classes that exist,
-                         * then the user can choose one of the classes and then
-                         * all the students in that class will be printed.
-                         */
-                        using (var context = new SchoolContext())
-                        {
-                            // Prints a list of all courses
-                            var classes = context.Courses.ToList();
-                            foreach (var c in classes)
-                            {
-                                Console.WriteLine(c.CourseId + ". " + c.CourseName);
-                            }
-
-                            Console.WriteLine("Which class do you want to see? Type a corresponding number.");
-                            string? classChoice = Console.ReadLine();
-                            Console.WriteLine("");
-
-                            // Tries to parse the choice and checks if any courses can be found with that ID
-                            if (int.TryParse(classChoice, out int classChoiceInt) && classes.Any(c => c.CourseId == classChoiceInt))
-                            {
-                                // Selects all the students where their enrolment course ID equals to user choice
-                                var studentsInCourse = context.Enrolments
-                                    .Where(e => e.CourseId == classChoiceInt)
-                                    .Select(e => e.Student)
-                                    .ToList();
-
-                                string courseName = classes.First(c => c.CourseId == classChoiceInt).CourseName;
-                                Console.WriteLine($"Students in {courseName}:");
-
-                                // Prints all the students
-                                foreach (var student in studentsInCourse)
-                                {
-                                    Console.WriteLine($"{student.FirstName} {student.LastName}");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid choice");
-                            }
-                        }
-
+                        DisplayStudentsInCourse();
                         Console.WriteLine("");
                         break;
                     case "4":
@@ -332,6 +291,50 @@ namespace Labb3_Anropa_Databasen
                     default:
                         Console.WriteLine("Invalid choice");
                         break;
+                }
+            }
+        }
+        public static void DisplayStudentsInCourse()
+        {
+            /* Display all students in a certain class.
+             * The user must first see a list of all the classes that exist,
+             * then the user can choose one of the classes and then
+             * all the students in that class will be printed.
+             */
+            using (var context = new SchoolContext())
+            {
+                // Prints a list of all courses
+                var classes = context.Courses.ToList();
+                foreach (var c in classes)
+                {
+                    Console.WriteLine(c.CourseId + ". " + c.CourseName);
+                }
+
+                Console.WriteLine("Which class do you want to see? Type a corresponding number.");
+                string? classChoice = Console.ReadLine();
+                Console.WriteLine("");
+
+                // Tries to parse the choice and checks if any courses can be found with that ID
+                if (int.TryParse(classChoice, out int classChoiceInt) && classes.Any(c => c.CourseId == classChoiceInt))
+                {
+                    // Selects all the students where their enrolment course ID equals to user choice
+                    var studentsInCourse = context.Enrolments
+                        .Where(e => e.CourseId == classChoiceInt)
+                        .Select(e => e.Student)
+                        .ToList();
+
+                    string courseName = classes.First(c => c.CourseId == classChoiceInt).CourseName;
+                    Console.WriteLine($"Students in {courseName}:");
+
+                    // Prints all the students
+                    foreach (var student in studentsInCourse)
+                    {
+                        Console.WriteLine($"{student.FirstName} {student.LastName}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice");
                 }
             }
         }

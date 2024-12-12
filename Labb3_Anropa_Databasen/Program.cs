@@ -225,27 +225,33 @@ namespace Labb3_Anropa_Databasen
                          */
                         using (var context = new SchoolContext())
                         {
+                            // Makes a list of all grades from a specific course
+                            var grades = context.Enrolments
+                                .Where(e => e.CourseId == 1)
+                                .Select(e => e.Grade)
+                                .ToList();
+
                             // Sample list of grades
-                            List<char> grades = new List<char> { 'A', 'B', 'A', 'C', 'B', 'F', 'A' };
+                            //List<char> grades = new List<char> { 'A', 'B', 'A', 'C', 'B', 'F', 'A' };
 
                             // Grade to numeric mapping
-                            Dictionary<char, int> gradeToPoints = new Dictionary<char, int>
+                            Dictionary<string, int> gradeToPoints = new Dictionary<string, int>
                             {
-                                { 'A', 4 },
-                                { 'B', 3 },
-                                { 'C', 2 },
-                                { 'D', 1 },
-                                { 'F', 0 }
+                                { "A", 4 },
+                                { "B", 3 },
+                                { "C", 2 },
+                                { "D", 1 },
+                                { "F", 0 }
                             };
 
                             // Numeric to grade mapping
-                            Dictionary<int, char> pointsToGrade = new Dictionary<int, char>
+                            Dictionary<int, string> pointsToGrade = new Dictionary<int, string>
                             {
-                                { 4, 'A' },
-                                { 3, 'B' },
-                                { 2, 'C' },
-                                { 1, 'D' },
-                                { 0, 'F' }
+                                { 4, "A" },
+                                { 3, "B" },
+                                { 2, "C" },
+                                { 1, "D" },
+                                { 0, "F" }
                             };
 
                             // Calculate the average points
@@ -258,7 +264,7 @@ namespace Labb3_Anropa_Databasen
 
                             // Convert back to a grade if needed (round to the nearest whole number)
                             int roundedPoints = (int)Math.Round(averagePoints);
-                            char averageGrade = pointsToGrade.ContainsKey(roundedPoints) ? pointsToGrade[roundedPoints] : '?';
+                            string averageGrade = pointsToGrade.ContainsKey(roundedPoints) ? pointsToGrade[roundedPoints] : "?";
 
                             Console.WriteLine($"Average Grade: {averageGrade}");
                         }

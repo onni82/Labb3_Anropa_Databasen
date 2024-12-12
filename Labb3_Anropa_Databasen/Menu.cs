@@ -24,7 +24,6 @@ namespace Labb3_Anropa_Databasen
                 Console.WriteLine("5. Display all grades for a course");
                 Console.WriteLine("6. Add a new student");
                 Console.WriteLine("7. Add new staff");
-                Console.ResetColor();
                 Console.WriteLine("8. Exit application");
 
                 string? choice = Console.ReadLine();

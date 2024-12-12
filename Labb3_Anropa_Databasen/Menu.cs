@@ -62,7 +62,7 @@ namespace Labb3_Anropa_Databasen
                          * The user gets the opportunity to enter information about
                          * a new student and that data is then saved in the database.
                          */
-
+                        Console.WriteLine("");
                         break;
                     case "7":
                         Console.WriteLine("");

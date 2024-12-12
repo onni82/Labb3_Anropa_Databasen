@@ -139,10 +139,10 @@ namespace Labb3_Anropa_Databasen
         public static void DisplayStudents()
         {
             /* Display all students.
-                         * The user can choose whether they want to see the students
-                         * sorted by first or last name and whether it should be
-                         * sorted in ascending or descending order.
-                         */
+             * The user can choose whether they want to see the students
+             * sorted by first or last name and whether it should be
+             * sorted in ascending or descending order.
+             */
             using (var context = new SchoolContext())
             {
                 Console.WriteLine("Do you want to sort the students by first or last name?");

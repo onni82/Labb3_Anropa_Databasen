@@ -49,37 +49,7 @@ namespace Labb3_Anropa_Databasen
                         break;
                     case "4":
                         Console.WriteLine("");
-                        /* Display all grades set in the last month.
-                         * The user immediately gets a list of all the grades set in the last month,
-                         * where the student's name, the name of the course and the grade appear.
-                         */
-                        using (var context = new SchoolContext())
-                        {
-                            // Gets the current date and subtracts 30 days
-                            DateTime lastMonth = DateTime.Now.AddDays(-30);
-
-                            // Selects all the enrolments where the enrolment date is after the last month
-                            var grades = context.Enrolments
-                                .Include(e => e.Student)   // Include related Student
-                                .Include(e => e.Course)    // Include related Course
-                                .Include(e => e.Staff)     // Include related Staff
-                                .Where(e => e.GradeDate > lastMonth)
-                                .ToList();
-
-                            if (grades.Count == 0 || grades == null)
-                            {
-                                Console.WriteLine("No grades set in the last month.");
-                            }
-                            else
-                            {
-                                // Prints all the grades
-                                foreach (var grade in grades)
-                                {
-                                    Console.WriteLine($"{grade.Student.FirstName} {grade.Student.LastName} - {grade.Course.CourseName}: {grade.Grade}. Graded on {grade.GradeDate:D}");
-                                }
-                            }
-                        }
-
+                        DisplayGradesFromLastMonth();
                         Console.WriteLine("");
                         break;
                     case "5":
@@ -335,6 +305,39 @@ namespace Labb3_Anropa_Databasen
                 else
                 {
                     Console.WriteLine("Invalid choice");
+                }
+            }
+        }
+        public static void DisplayGradesFromLastMonth()
+        {
+            /* Display all grades set in the last month.
+             * The user immediately gets a list of all the grades set in the last month,
+             * where the student's name, the name of the course and the grade appear.
+             */
+            using (var context = new SchoolContext())
+            {
+                // Gets the current date and subtracts 30 days
+                DateTime lastMonth = DateTime.Now.AddDays(-30);
+
+                // Selects all the enrolments where the enrolment date is after the last month
+                var grades = context.Enrolments
+                    .Include(e => e.Student)   // Include related Student
+                    .Include(e => e.Course)    // Include related Course
+                    .Include(e => e.Staff)     // Include related Staff
+                    .Where(e => e.GradeDate > lastMonth)
+                    .ToList();
+
+                if (grades.Count == 0 || grades == null)
+                {
+                    Console.WriteLine("No grades set in the last month.");
+                }
+                else
+                {
+                    // Prints all the grades
+                    foreach (var grade in grades)
+                    {
+                        Console.WriteLine($"{grade.Student.FirstName} {grade.Student.LastName} - {grade.Course.CourseName}: {grade.Grade}. Graded on {grade.GradeDate:D}");
+                    }
                 }
             }
         }

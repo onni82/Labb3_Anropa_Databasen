@@ -260,9 +260,6 @@ namespace Labb3_Anropa_Databasen
                                 .Select(e => e.Grade)
                                 .ToList();
 
-                            // Sample list of grades
-                            //List<char> grades = new List<char> { 'A', 'B', 'A', 'C', 'B', 'F', 'A' };
-
                             // Grade to numeric mapping
                             Dictionary<string, int> gradeToPoints = new Dictionary<string, int>
                             {

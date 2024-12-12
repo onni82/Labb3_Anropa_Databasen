@@ -20,7 +20,7 @@ namespace Labb3_Anropa_Databasen
                 Console.WriteLine("1. Display staff");
                 Console.WriteLine("2. Display all students");
                 Console.WriteLine("3. Display all students in a class");
-                Console.WriteLine("4. Display all grades this month");
+                Console.WriteLine("4. Display all grades set the last month");
                 Console.WriteLine("5. Display all grades for a course");
                 Console.WriteLine("6. Add a new student");
                 Console.WriteLine("7. Add new staff");

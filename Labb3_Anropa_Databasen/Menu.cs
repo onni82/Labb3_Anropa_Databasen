@@ -245,7 +245,8 @@ namespace Labb3_Anropa_Databasen
                 Console.WriteLine("");
 
                 // Tries to parse the choice and checks if any courses can be found with that ID
-                if (int.TryParse(classChoice, out int classChoiceInt) && classes.Any(c => c.CourseId == classChoiceInt))
+                var courses = context.Courses.ToList();
+                if (int.TryParse(classChoice, out int classChoiceInt) && courses.Any(c => c.CourseId == classChoiceInt))
                 {
                     // Selects all the students where their enrolment course ID equals to user choice
                     var studentsInCourse = context.Enrolments
@@ -253,7 +254,7 @@ namespace Labb3_Anropa_Databasen
                         .Select(e => e.Student)
                         .ToList();
 
-                    string courseName = classes.First(c => c.CourseId == classChoiceInt).CourseName;
+                    string courseName = courses.First(c => c.CourseId == classChoiceInt).CourseName;
                     Console.WriteLine($"Students in {courseName}:");
 
                     // Prints all the students

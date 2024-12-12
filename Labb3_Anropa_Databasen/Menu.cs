@@ -34,138 +34,12 @@ namespace Labb3_Anropa_Databasen
                 {
                     case "1":
                         Console.WriteLine("");
-
-                        // Display staff
-                        // The user can choose whether he wants to see all employees, or only within one of the categories, such as teachers
-                        using (var context = new SchoolContext())
-                        {
-                            // Prints a list of all Roless in the database
-                            var roles = context.Roles.ToList();
-
-                            Console.WriteLine("All roles:");
-                            foreach (var role in roles)
-                            {
-                                Console.WriteLine(role.RoleId + ". " + role.RoleName);
-                            }
-
-                            Console.WriteLine("Which role do you want to see? Type a corresponding number, or 0 to view all staff.");
-                            string? roleChoice = Console.ReadLine();
-
-                            if (roleChoice == "0")
-                            {
-                                IEnumerable<IGrouping<string?, Staff>> staffByRole = context.Staff.GroupBy(s => s.Role.RoleName);
-                                foreach (var group in staffByRole)
-                                {
-                                    Console.WriteLine("");
-                                    Console.WriteLine($"{group.Key}:");
-                                    foreach (var s in group)
-                                    {
-                                        Console.WriteLine($"{s.FirstName} {s.LastName}");
-                                    }
-                                }
-                            }
-
-                            // Checks the user's choice is an existing role
-                            // First it tries to parse the choice before checking
-                            else if (int.TryParse(roleChoice, out int roleChoiceInt) && roles.Any(r => r.RoleId == roleChoiceInt))
-                            {
-                                var staff = context.Staff.Where(s => s.RoleId == int.Parse(roleChoice)).ToList();
-                                foreach (var s in staff)
-                                {
-                                    Console.WriteLine($"{s.FirstName} {s.LastName}");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid choice");
-                            }
-
-                        }
+                        DisplayStaff();
                         Console.WriteLine("");
                         break;
                     case "2":
                         Console.WriteLine("");
-
-                        /* Display all students.
-                         * The user can choose whether they want to see the students
-                         * sorted by first or last name and whether it should be
-                         * sorted in ascending or descending order.
-                         */
-                        using (var context = new SchoolContext())
-                        {
-                            Console.WriteLine("Do you want to sort the students by first or last name?");
-                            Console.WriteLine("1. First name");
-                            Console.WriteLine("2. Last name");
-                            string? sortChoice = Console.ReadLine();
-                            Console.WriteLine("");
-                            switch (sortChoice)
-                            {
-                                // Sort students by first name
-                                case "1":
-                                    Console.WriteLine("Do you want to sort the students in ascending or descending order?");
-                                    Console.WriteLine("1. Ascending");
-                                    Console.WriteLine("2. Descending");
-                                    string? firstNameOrderChoice = Console.ReadLine();
-                                    Console.WriteLine("");
-                                    switch (firstNameOrderChoice)
-                                    {
-                                        // Sort students by first name, ascending
-                                        case "1":
-                                            var students = context.Students.OrderBy(s => s.FirstName).ToList();
-                                            foreach (var student in students)
-                                            {
-                                                Console.WriteLine(student.FirstName + " " + student.LastName);
-                                            }
-                                            break;
-                                        // Sort students by first name, descending
-                                        case "2":
-                                            var students2 = context.Students.OrderByDescending(s => s.FirstName).ToList();
-                                            foreach (var student in students2)
-                                            {
-                                                Console.WriteLine(student.FirstName + " " + student.LastName);
-                                            }
-                                            break;
-                                        default:
-                                            Console.WriteLine("Invalid choice");
-                                            break;
-                                    }
-                                    break;
-                                // Sort students by last name
-                                case "2":
-                                    Console.WriteLine("Do you want to sort the students in ascending or descending order?");
-                                    Console.WriteLine("1. Ascending");
-                                    Console.WriteLine("2. Descending");
-                                    string? orderChoice = Console.ReadLine();
-                                    Console.WriteLine("");
-                                    switch (orderChoice)
-                                    {
-                                        // Sort students by last name, ascending
-                                        case "1":
-                                            var students = context.Students.OrderBy(s => s.LastName).ToList();
-                                            foreach (var student in students)
-                                            {
-                                                Console.WriteLine(student.FirstName + " " + student.LastName);
-                                            }
-                                            break;
-                                        // Sort students by last name, descending
-                                        case "2":
-                                            var students2 = context.Students.OrderByDescending(s => s.LastName).ToList();
-                                            foreach (var student in students2)
-                                            {
-                                                Console.WriteLine(student.FirstName + " " + student.LastName);
-                                            }
-                                            break;
-                                        default:
-                                            Console.WriteLine("Invalid choice");
-                                            break;
-                                    }
-                                    break;
-                                default:
-                                    Console.WriteLine("Invalid choice");
-                                    break;
-                            }
-                        }
-
+                        DisplayStudents();
                         Console.WriteLine("");
                         break;
                     case "3":
@@ -324,6 +198,138 @@ namespace Labb3_Anropa_Databasen
                         return;
                     default:
                         Console.WriteLine("");
+                        Console.WriteLine("Invalid choice");
+                        break;
+                }
+            }
+        }
+        public static void DisplayStaff()
+        {
+            // Display staff
+            // The user can choose whether he wants to see all employees, or only within one of the categories, such as teachers
+            using (var context = new SchoolContext())
+            {
+                // Prints a list of all Roless in the database
+                var roles = context.Roles.ToList();
+
+                Console.WriteLine("All roles:");
+                foreach (var role in roles)
+                {
+                    Console.WriteLine(role.RoleId + ". " + role.RoleName);
+                }
+
+                Console.WriteLine("Which role do you want to see? Type a corresponding number, or 0 to view all staff.");
+                string? roleChoice = Console.ReadLine();
+
+                if (roleChoice == "0")
+                {
+                    IEnumerable<IGrouping<string?, Staff>> staffByRole = context.Staff.GroupBy(s => s.Role.RoleName);
+                    foreach (var group in staffByRole)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine($"{group.Key}:");
+                        foreach (var s in group)
+                        {
+                            Console.WriteLine($"{s.FirstName} {s.LastName}");
+                        }
+                    }
+                }
+
+                // Checks the user's choice is an existing role
+                // First it tries to parse the choice before checking
+                else if (int.TryParse(roleChoice, out int roleChoiceInt) && roles.Any(r => r.RoleId == roleChoiceInt))
+                {
+                    var staff = context.Staff.Where(s => s.RoleId == int.Parse(roleChoice)).ToList();
+                    foreach (var s in staff)
+                    {
+                        Console.WriteLine($"{s.FirstName} {s.LastName}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice");
+                }
+
+            }
+        }
+
+        public static void DisplayStudents()
+        {
+            /* Display all students.
+                         * The user can choose whether they want to see the students
+                         * sorted by first or last name and whether it should be
+                         * sorted in ascending or descending order.
+                         */
+            using (var context = new SchoolContext())
+            {
+                Console.WriteLine("Do you want to sort the students by first or last name?");
+                Console.WriteLine("1. First name");
+                Console.WriteLine("2. Last name");
+                string? sortChoice = Console.ReadLine();
+                Console.WriteLine("");
+                switch (sortChoice)
+                {
+                    // Sort students by first name
+                    case "1":
+                        Console.WriteLine("Do you want to sort the students in ascending or descending order?");
+                        Console.WriteLine("1. Ascending");
+                        Console.WriteLine("2. Descending");
+                        string? firstNameOrderChoice = Console.ReadLine();
+                        Console.WriteLine("");
+                        switch (firstNameOrderChoice)
+                        {
+                            // Sort students by first name, ascending
+                            case "1":
+                                var students = context.Students.OrderBy(s => s.FirstName).ToList();
+                                foreach (var student in students)
+                                {
+                                    Console.WriteLine(student.FirstName + " " + student.LastName);
+                                }
+                                break;
+                            // Sort students by first name, descending
+                            case "2":
+                                var students2 = context.Students.OrderByDescending(s => s.FirstName).ToList();
+                                foreach (var student in students2)
+                                {
+                                    Console.WriteLine(student.FirstName + " " + student.LastName);
+                                }
+                                break;
+                            default:
+                                Console.WriteLine("Invalid choice");
+                                break;
+                        }
+                        break;
+                    // Sort students by last name
+                    case "2":
+                        Console.WriteLine("Do you want to sort the students in ascending or descending order?");
+                        Console.WriteLine("1. Ascending");
+                        Console.WriteLine("2. Descending");
+                        string? orderChoice = Console.ReadLine();
+                        Console.WriteLine("");
+                        switch (orderChoice)
+                        {
+                            // Sort students by last name, ascending
+                            case "1":
+                                var students = context.Students.OrderBy(s => s.LastName).ToList();
+                                foreach (var student in students)
+                                {
+                                    Console.WriteLine(student.FirstName + " " + student.LastName);
+                                }
+                                break;
+                            // Sort students by last name, descending
+                            case "2":
+                                var students2 = context.Students.OrderByDescending(s => s.LastName).ToList();
+                                foreach (var student in students2)
+                                {
+                                    Console.WriteLine(student.FirstName + " " + student.LastName);
+                                }
+                                break;
+                            default:
+                                Console.WriteLine("Invalid choice");
+                                break;
+                        }
+                        break;
+                    default:
                         Console.WriteLine("Invalid choice");
                         break;
                 }

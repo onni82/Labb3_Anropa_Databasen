@@ -317,45 +317,58 @@ namespace Labb3_Anropa_Databasen
             DisplayAllCourses();
             using (var context = new SchoolContext())
             {
-                // Makes a list of all grades from a specific course
-                var grades = context.Enrolments
-                    .Where(e => e.CourseId == 1)
-                    .Select(e => e.Grade)
-                    .ToList();
+                Console.WriteLine("Which class do you want to see? Type a corresponding number.");
+                string? classChoice = Console.ReadLine();
+                Console.WriteLine("");
 
-                // Grade to numeric mapping
-                Dictionary<string, int> gradeToPoints = new Dictionary<string, int>
+                // Tries to parse the choice and checks if any courses can be found with that ID
+                var courses = context.Courses.ToList();
+                if (int.TryParse(classChoice, out int classChoiceInt) && courses.Any(c => c.CourseId == classChoiceInt))
                 {
-                    { "A", 4 },
-                    { "B", 3 },
-                    { "C", 2 },
-                    { "D", 1 },
-                    { "F", 0 }
-                };
+                    // Makes a list of all grades from a specific course
+                    var grades = context.Enrolments
+                        .Where(e => e.CourseId == classChoiceInt)
+                        .Select(e => e.Grade)
+                        .ToList();
 
-                // Numeric to grade mapping
-                Dictionary<int, string> pointsToGrade = new Dictionary<int, string>
+                    // Grade to numeric mapping
+                    Dictionary<string, int> gradeToPoints = new Dictionary<string, int>
+                    {
+                        { "A", 4 },
+                        { "B", 3 },
+                        { "C", 2 },
+                        { "D", 1 },
+                        { "F", 0 }
+                    };
+
+                    // Numeric to grade mapping
+                    Dictionary<int, string> pointsToGrade = new Dictionary<int, string>
+                    {
+                        { 4, "A" },
+                        { 3, "B" },
+                        { 2, "C" },
+                        { 1, "D" },
+                        { 0, "F" }
+                    };
+
+                    // Calculate the average points
+                    double averagePoints = grades
+                        .Where(grade => gradeToPoints.ContainsKey(grade)) // Ensure valid grades
+                        .Select(grade => gradeToPoints[grade]) // Convert grades to points
+                        .Average();
+
+                    Console.WriteLine($"Average Points: {averagePoints:F2}");
+
+                    // Convert back to a grade if needed (round to the nearest whole number)
+                    int roundedPoints = (int)Math.Round(averagePoints);
+                    string averageGrade = pointsToGrade.ContainsKey(roundedPoints) ? pointsToGrade[roundedPoints] : "?";
+
+                    Console.WriteLine($"Average Grade: {averageGrade}");
+                }
+                else
                 {
-                    { 4, "A" },
-                    { 3, "B" },
-                    { 2, "C" },
-                    { 1, "D" },
-                    { 0, "F" }
-                };
-
-                // Calculate the average points
-                double averagePoints = grades
-                    .Where(grade => gradeToPoints.ContainsKey(grade)) // Ensure valid grades
-                    .Select(grade => gradeToPoints[grade]) // Convert grades to points
-                    .Average();
-
-                Console.WriteLine($"Average Points: {averagePoints:F2}");
-
-                // Convert back to a grade if needed (round to the nearest whole number)
-                int roundedPoints = (int)Math.Round(averagePoints);
-                string averageGrade = pointsToGrade.ContainsKey(roundedPoints) ? pointsToGrade[roundedPoints] : "?";
-
-                Console.WriteLine($"Average Grade: {averageGrade}");
+                    Console.WriteLine("Invalid choice");
+                }
             }
         }
     }

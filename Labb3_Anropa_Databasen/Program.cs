@@ -180,6 +180,8 @@ namespace Labb3_Anropa_Databasen
 
                             Console.WriteLine("Which class do you want to see? Type a corresponding number.");
                             string? classChoice = Console.ReadLine();
+                            Console.WriteLine("");
+
                             // Tries to parse the choice and checks if any courses can be found with that ID
                             if (int.TryParse(classChoice, out int classChoiceInt) && classes.Any(c => c.CourseId == classChoiceInt))
                             {
@@ -212,6 +214,22 @@ namespace Labb3_Anropa_Databasen
                          * The user immediately gets a list of all the grades set in the last month,
                          * where the student's name, the name of the course and the grade appear.
                          */
+                        using (var context = new SchoolContext())
+                        {
+                            // Gets the current date and subtracts 30 days
+                            DateTime lastMonth = DateTime.Now.AddDays(-30);
+
+                            // Selects all the enrolments where the enrolment date is after the last month
+                            var grades = context.Enrolments
+                                .Where(e => e.GradeDate > lastMonth)
+                                .ToList();
+
+                            // Prints all the grades
+                            foreach (var grade in grades)
+                            {
+                                Console.WriteLine($"{grade.Student.FirstName} {grade.Student.LastName} - {grade.Course.CourseName}: {grade.Grade}");
+                            }
+                        }
 
                         Console.WriteLine("");
                         break;

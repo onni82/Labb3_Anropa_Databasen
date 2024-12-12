@@ -1,5 +1,6 @@
 ﻿using Labb3_Anropa_Databasen.Models;
 using Labb3_Anropa_Databasen.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Labb3_Anropa_Databasen
 {
@@ -221,13 +222,23 @@ namespace Labb3_Anropa_Databasen
 
                             // Selects all the enrolments where the enrolment date is after the last month
                             var grades = context.Enrolments
+                                .Include(e => e.Student)   // Include related Student
+                                .Include(e => e.Course)    // Include related Course
+                                .Include(e => e.Staff)     // Include related Staff
                                 .Where(e => e.GradeDate > lastMonth)
                                 .ToList();
 
-                            // Prints all the grades
-                            foreach (var grade in grades)
+                            if (grades.Count == 0 || grades == null)
                             {
-                                Console.WriteLine($"{grade.Student.FirstName} {grade.Student.LastName} - {grade.Course.CourseName}: {grade.Grade}");
+                                Console.WriteLine("No grades set in the last month.");
+                            }
+                            else
+                            {
+                                // Prints all the grades
+                                foreach (var grade in grades)
+                                {
+                                    Console.WriteLine($"{grade.Student.FirstName} {grade.Student.LastName} - {grade.Course.CourseName}: {grade.Grade}. Graded on {grade.GradeDate:D}");
+                                }
                             }
                         }
 

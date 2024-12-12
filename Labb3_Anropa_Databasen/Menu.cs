@@ -84,6 +84,7 @@ namespace Labb3_Anropa_Databasen
                 }
             }
         }
+
         public static void DisplayStaff()
         {
             // Display staff
@@ -218,6 +219,7 @@ namespace Labb3_Anropa_Databasen
                 }
             }
         }
+
         public static void DisplayAllCourses()
         {
             using (var context = new SchoolContext())
@@ -230,6 +232,7 @@ namespace Labb3_Anropa_Databasen
                 }
             }
         }
+
         public static void DisplayStudentsInCourse()
         {
             /* Display all students in a certain class.
@@ -269,6 +272,7 @@ namespace Labb3_Anropa_Databasen
                 }
             }
         }
+
         public static void DisplayGradesFromLastMonth()
         {
             /* Display all grades set in the last month.
@@ -302,6 +306,7 @@ namespace Labb3_Anropa_Databasen
                 }
             }
         }
+
         public static void DisplayGradesFromCourse()
         {
             /* Display a list of all courses and the average grade

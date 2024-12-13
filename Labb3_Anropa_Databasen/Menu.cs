@@ -98,7 +98,6 @@ namespace Labb3_Anropa_Databasen
             // The user can choose whether he wants to see all employees, or only within one of the categories, such as teachers
             using (var context = new SchoolContext())
             {
-                var roles = context.Roles.ToList();
                 Console.WriteLine("Which role do you want to see? Type a corresponding number, or 0 to view all staff.");
                 string? roleChoice = Console.ReadLine();
 
@@ -120,7 +119,7 @@ namespace Labb3_Anropa_Databasen
 
                 // Checks the user's choice is an existing role
                 // First it tries to parse the choice before checking
-                else if (int.TryParse(roleChoice, out int roleChoiceInt) && roles.Any(r => r.RoleId == roleChoiceInt))
+                else if (int.TryParse(roleChoice, out int roleChoiceInt) && context.Roles.ToList().Any(r => r.RoleId == roleChoiceInt))
                 {
                     var staff = context.Staff.Where(s => s.RoleId == int.Parse(roleChoice)).ToList();
                     foreach (var s in staff)
@@ -452,6 +451,16 @@ namespace Labb3_Anropa_Databasen
                 {
                     Console.WriteLine("Last name cannot be empty. Please enter a valid last name:");
                     lastName = Console.ReadLine();
+                }
+
+                DisplayStaffRoles();
+
+                Console.WriteLine("What role does this new staff have? Type a corresponding number.");
+                string? roleChoice = Console.ReadLine();
+
+                while (int.TryParse(roleChoice, out var roleChoiceInt) == false && context.Roles.ToList().Any(r => r.RoleId == roleChoiceInt) == false)
+                {
+                    
                 }
 
                 // Creates a new staff object

@@ -77,10 +77,8 @@ namespace Labb3_Anropa_Databasen
             }
         }
 
-        public static void DisplayStaff()
+        public static void DisplayStaffRoles()
         {
-            // Display staff
-            // The user can choose whether he wants to see all employees, or only within one of the categories, such as teachers
             using (var context = new SchoolContext())
             {
                 // Prints a list of all Roless in the database
@@ -91,7 +89,16 @@ namespace Labb3_Anropa_Databasen
                 {
                     Console.WriteLine(role.RoleId + ". " + role.RoleName);
                 }
+            }
+        }
 
+        public static void DisplayStaff()
+        {
+            // Display staff
+            // The user can choose whether he wants to see all employees, or only within one of the categories, such as teachers
+            using (var context = new SchoolContext())
+            {
+                var roles = context.Roles.ToList();
                 Console.WriteLine("Which role do you want to see? Type a corresponding number, or 0 to view all staff.");
                 string? roleChoice = Console.ReadLine();
 

@@ -460,7 +460,11 @@ namespace Labb3_Anropa_Databasen
 
                 while (int.TryParse(roleChoice, out var roleChoiceInt) == false && context.Roles.ToList().Any(r => r.RoleId == roleChoiceInt) == false)
                 {
-                    
+                    Console.WriteLine("Invalid choice. Please enter a valid role number.");
+                    //DisplayStaffRoles();
+
+                    Console.WriteLine("What role does this new staff have? Type a corresponding number.");
+                    roleChoice = Console.ReadLine();
                 }
 
                 // Creates a new staff object

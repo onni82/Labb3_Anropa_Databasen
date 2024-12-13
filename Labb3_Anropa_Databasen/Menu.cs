@@ -63,11 +63,7 @@ namespace Labb3_Anropa_Databasen
                         break;
                     case "7":
                         Console.WriteLine("");
-                        /* Add new staff.
-                         * The user gets the opportunity to enter information about
-                         * a new employee and that data is then saved in the database.
-                         */
-
+                        AddStaff();
                         Console.WriteLine("");
                         break;
                     case "8":
@@ -412,7 +408,7 @@ namespace Labb3_Anropa_Databasen
                 {
                     FirstName = firstName,
                     LastName = lastName,
-                    PersonalNumber = (long)personalNumber,
+                    PersonalNumber = (long)personalNumber
                 };
 
                 // Adds the new student to the database
@@ -420,6 +416,50 @@ namespace Labb3_Anropa_Databasen
                 context.SaveChanges();
 
                 Console.WriteLine("Student added successfully.");
+            }
+        }
+
+        public static void AddStaff()
+        {
+            /* Add new staff.
+             * The user gets the opportunity to enter information about
+             * a new employee and that data is then saved in the database.
+             */
+            using (var context = new SchoolContext())
+            {
+                // Check first name
+                Console.WriteLine("Enter the staff's first name:");
+                string? firstName = Console.ReadLine();
+                // Check if the first name is null or empty
+                while (string.IsNullOrWhiteSpace(firstName))
+                {
+                    Console.WriteLine("First name cannot be empty. Please enter a valid first name:");
+                    firstName = Console.ReadLine();
+                }
+
+                // Check last name
+                Console.WriteLine("Enter the staff's last name:");
+                string? lastName = Console.ReadLine();
+                // Check if the last name is null or empty
+                while (string.IsNullOrWhiteSpace(lastName))
+                {
+                    Console.WriteLine("Last name cannot be empty. Please enter a valid last name:");
+                    lastName = Console.ReadLine();
+                }
+
+                // Creates a new staff object
+                var newStaff = new Staff
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    
+                };
+
+                // Adds the new staff to the database
+                context.Staff.Add(newStaff);
+                context.SaveChanges();
+
+                Console.WriteLine("Staff added successfully.");
             }
         }
     }

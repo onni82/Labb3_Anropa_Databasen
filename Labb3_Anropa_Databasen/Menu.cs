@@ -458,7 +458,8 @@ namespace Labb3_Anropa_Databasen
                 Console.WriteLine("What role does this new staff have? Type a corresponding number.");
                 string? roleChoice = Console.ReadLine();
 
-                while (int.TryParse(roleChoice, out var roleChoiceInt) == false && context.Roles.ToList().Any(r => r.RoleId == roleChoiceInt) == false)
+                //Do a while loop as long as the role id doesn't exist
+                while (int.TryParse(roleChoice, out var roleInt) == false && context.Roles.ToList().Any(r => r.RoleId == roleInt) == false)
                 {
                     Console.WriteLine("Invalid choice. Please enter a valid role number.");
                     //DisplayStaffRoles();
@@ -467,12 +468,18 @@ namespace Labb3_Anropa_Databasen
                     roleChoice = Console.ReadLine();
                 }
 
+                int.TryParse(roleChoice, out var roleChoiceInt);
+
+                // Create a Role object based on the user's choice
+                var selectedRole = context.Roles.FirstOrDefault(r => r.RoleId == roleChoiceInt);
+
                 // Creates a new staff object
                 var newStaff = new Staff
                 {
                     FirstName = firstName,
                     LastName = lastName,
-                    
+                    RoleId = roleChoiceInt,
+                    Role = selectedRole
                 };
 
                 // Adds the new staff to the database

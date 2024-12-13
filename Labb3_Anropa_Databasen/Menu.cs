@@ -58,10 +58,7 @@ namespace Labb3_Anropa_Databasen
                         break;
                     case "6":
                         Console.WriteLine("");
-                        /* Add a new student
-                         * The user gets the opportunity to enter information about
-                         * a new student and that data is then saved in the database.
-                         */
+                        AddStudent();
                         Console.WriteLine("");
                         break;
                     case "7":
@@ -371,6 +368,58 @@ namespace Labb3_Anropa_Databasen
                 {
                     Console.WriteLine("Invalid choice");
                 }
+            }
+        }
+
+        public static void AddStudent()
+        {
+            /* Add a new student
+             * The user gets the opportunity to enter information about
+             * a new student and that data is then saved in the database.
+             */
+            using (var context = new SchoolContext())
+            {
+                // Check first name
+                Console.WriteLine("Enter the student's first name:");
+                string? firstName = Console.ReadLine();
+                // Check if the first name is null or empty
+                while (string.IsNullOrWhiteSpace(firstName)) {
+                    Console.WriteLine("First name cannot be empty. Please enter a valid first name:");
+                    firstName = Console.ReadLine();
+                }
+
+                // Check last name
+                Console.WriteLine("Enter the student's last name:");
+                string? lastName = Console.ReadLine();
+                // Check if the last name is null or empty
+                while (string.IsNullOrWhiteSpace(lastName))
+                {
+                    Console.WriteLine("Last name cannot be empty. Please enter a valid last name:");
+                    lastName = Console.ReadLine();
+                }
+
+                // Check personal number
+                Console.WriteLine("Enter the student's personal number (YYYYMMDDNNNN):");
+                long? personalNumber = long.Parse(Console.ReadLine());
+                while (context.Students.Any(s => s.PersonalNumber == personalNumber))
+                {
+                    Console.WriteLine("A student with that personal number already exists. Please enter a different personal number (YYYYMMDDNNNN):");
+                    personalNumber = long.Parse(Console.ReadLine());
+                }
+
+                // Creates a new student object
+                var newStudent = new Student
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    PersonalNumber = (long)personalNumber,
+                };
+
+                // Adds the new student to the database
+                context.Students.Add(newStudent);
+                context.SaveChanges();
+
+                Console.WriteLine("Student added successfully.");
             }
         }
     }

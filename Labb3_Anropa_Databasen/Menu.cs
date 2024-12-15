@@ -94,12 +94,14 @@ namespace Labb3_Anropa_Databasen
 
         public static void DisplayStaff()
         {
+            DisplayStaffRoles();
             // Display staff
             // The user can choose whether he wants to see all employees, or only within one of the categories, such as teachers
             using (var context = new SchoolContext())
             {
                 Console.WriteLine("Which role do you want to see? Type a corresponding number, or 0 to view all staff.");
                 string? roleChoice = Console.ReadLine();
+                Console.WriteLine("");
 
                 // Views all staff
                 if (roleChoice == "0")
@@ -457,6 +459,7 @@ namespace Labb3_Anropa_Databasen
 
                 Console.WriteLine("What role does this new staff have? Type a corresponding number.");
                 string? roleChoice = Console.ReadLine();
+                Console.WriteLine("");
 
                 //Do a while loop as long as the role id doesn't exist
                 while (int.TryParse(roleChoice, out var roleInt) == false && context.Roles.ToList().Any(r => r.RoleId == roleInt) == false)

@@ -57,114 +57,115 @@ CREATE TABLE Enrolment(
 );
 GO
 
--- Insert data into Roles table
-INSERT INTO Roles (RoleName)
-VALUES ('Teacher'), ('Principal'), ('Administrator');
-GO
-
--- Insert data into Staff table
-INSERT INTO Staff (FirstName, LastName, RoleId)
-VALUES 
-('Alice', 'Johnson', 1), -- Teacher
-('Bob', 'Smith', 1),     -- Teacher
-('Catherine', 'Lee', 2), -- Principal
-('David', 'Brown', 3);   -- Administrator
-GO
-
--- Insert data into Students table
-INSERT INTO Students (FirstName, LastName, PersonalNumber)
-VALUES 
-('Emma', 'Anderson', 200101015678),
-('Liam', 'Walker', 200305157856),
-('Sophia', 'Martinez', 200412145678),
-('Mason', 'Clark', 200506172345);
-GO
-
--- Insert data into Courses table
-INSERT INTO Courses (CourseName)
-VALUES 
-('Mathematics'),
-('Science'),
-('History'),
-('English');
-GO
-
--- Insert data into Enrolment table
-INSERT INTO Enrolment (CourseId, StudentId, StaffId, Grade, GradeDate)
-VALUES
-(1, 1, 1, 'A', '2024-01-10'), -- Mathematics, Emma, Alice
-(2, 2, 1, 'B', '2024-01-15'), -- Science, Liam, Alice
-(3, 3, 2, 'C', '2024-02-01'), -- History, Sophia, Bob
-(4, 4, 2, 'A', '2024-02-15'); -- English, Mason, Bob
-GO
-
--- Insert additional data into Roles table
+-- Insert roles
 INSERT INTO Roles (RoleName)
 VALUES 
-('Counselor'), 
-('Librarian'), 
-('Janitor');
-GO
+('Principal'),
+('Vice Principal'),
+('Math Teacher'),
+('English Teacher'),
+('History Teacher'),
+('Science Teacher'),
+('Physical Education Teacher'),
+('Art Teacher'),
+('Music Teacher'),
+('Computer Science Teacher'),
+('Librarian'),
+('Counselor'),
+('Nurse'),
+('Janitor'),
+('Secretary'),
+('Administrator'),
+('Substitute Teacher'),
+('Language Teacher'),
+('Business Teacher'),
+('Social Studies Teacher');
 
--- Insert additional data into Staff table
+-- Insert staff
 INSERT INTO Staff (FirstName, LastName, RoleId)
-VALUES 
-('Eleanor', 'White', 1), -- Teacher
-('George', 'Taylor', 1), -- Teacher
-('Hannah', 'Moore', 4),  -- Counselor
-('Ian', 'Wilson', 4),    -- Counselor
-('Julia', 'Hall', 5),    -- Librarian
-('Kevin', 'Harris', 6);  -- Janitor
-GO
+VALUES
+('Alice', 'Smith', 1),
+('Bob', 'Johnson', 2),
+('Charlie', 'Williams', 3),
+('Diana', 'Brown', 4),
+('Evan', 'Jones', 5),
+('Fiona', 'Garcia', 6),
+('George', 'Martinez', 7),
+('Hannah', 'Rodriguez', 8),
+('Ian', 'Hernandez', 9),
+('Julia', 'Lopez', 10),
+('Kevin', 'Gonzalez', 11),
+('Laura', 'Wilson', 12),
+('Mike', 'Anderson', 13),
+('Nina', 'Thomas', 14),
+('Oscar', 'Moore', 15),
+('Paula', 'Taylor', 16),
+('Quinn', 'Jackson', 17),
+('Riley', 'White', 18),
+('Sophia', 'Harris', 19),
+('Tom', 'Clark', 20);
 
--- Insert additional data into Students table
+-- Insert students
 INSERT INTO Students (FirstName, LastName, PersonalNumber)
-VALUES 
-('Olivia', 'Thomas', 200701025678),
-('Noah', 'King', 200803127856),
-('Isabella', 'Scott', 200912145678),
-('Logan', 'Green', 201001172345),
-('Sophia', 'Adams', 201105157856),
-('James', 'Baker', 201209145678),
-('Ava', 'Nelson', 201305172345),
-('Ethan', 'Carter', 201406112356),
-('Mia', 'Mitchell', 201508154567),
-('Lucas', 'Perez', 201612174589);
-GO
+VALUES
+('Aaron', 'Adams', 100001),
+('Betty', 'Baker', 100002),
+('Cathy', 'Carter', 100003),
+('David', 'Davis', 100004),
+('Ella', 'Evans', 100005),
+('Frank', 'Ford', 100006),
+('Grace', 'Green', 100007),
+('Harry', 'Hall', 100008),
+('Ivy', 'Irwin', 100009),
+('Jack', 'Jones', 100010),
+('Kara', 'King', 100011),
+('Liam', 'Lewis', 100012),
+('Mia', 'Martin', 100013),
+('Noah', 'Nelson', 100014),
+('Olivia', 'Owens', 100015),
+('Peter', 'Parker', 100016),
+('Quinn', 'Quincy', 100017),
+('Rachel', 'Reed', 100018),
+('Sam', 'Smith', 100019),
+('Tina', 'Turner', 100020);
 
--- Insert additional data into Courses table
+-- Insert courses
 INSERT INTO Courses (CourseName)
-VALUES 
-('Physics'),
-('Chemistry'),
-('Biology'),
-('Art'),
-('Physical Education'),
-('Music'),
-('Computer Science'),
-('Economics'),
-('Psychology'),
-('Geography');
-GO
+VALUES
+('Math 101'),
+('English 101'),
+('History 101'),
+('Science 101'),
+('Art 101'),
+('Music 101'),
+('Physical Education 101'),
+('Computer Science 101'),
+('Business 101'),
+('Social Studies 101');
 
--- Insert additional data into Enrolment table
+-- Insert enrolments with grades
+DECLARE @Today DATETIME = GETDATE();
+DECLARE @LastMonth DATETIME = DATEADD(MONTH, -1, @Today);
+
 INSERT INTO Enrolment (CourseId, StudentId, StaffId, Grade, GradeDate)
 VALUES
--- Linking students to various courses and teachers with grades and dates
-(1, 1, 1, 'B', '2024-03-01'), -- Mathematics, Emma, Alice
-(2, 2, 1, 'A', '2024-03-15'), -- Science, Liam, Alice
-(3, 3, 2, 'B', '2024-04-01'), -- History, Sophia, Bob
-(4, 4, 2, 'A', '2024-04-15'), -- English, Mason, Bob
-(5, 5, 3, 'A', '2024-05-01'), -- Physics, Sophia, Eleanor
-(6, 6, 3, 'C', '2024-05-15'), -- Chemistry, James, Eleanor
-(7, 7, 4, 'B', '2024-06-01'), -- Biology, Ava, George
-(8, 8, 4, 'A', '2024-06-15'), -- Art, Ethan, George
-(9, 9, 5, 'A', '2024-07-01'), -- Physical Education, Mia, Hannah
-(10, 10, 5, 'B', '2024-07-15'), -- Music, Lucas, Hannah
-(1, 1, 6, 'C', '2024-08-01'), -- Computer Science, Emma, Ian
-(2, 2, 6, 'B', '2024-08-15'), -- Economics, Liam, Ian
-(3, 3, 7, 'A', '2024-09-01'), -- Psychology, Sophia, Julia
-(4, 4, 7, 'B', '2024-09-15'), -- Geography, Mason, Julia
-(5, 5, 8, 'A', '2024-10-01'), -- Physics, Sophia, Kevin
-(6, 6, 8, 'B', '2024-10-15'); -- Chemistry, James, Kevin
-GO
+(1, 1, 3, 'A', DATEADD(DAY, -7, @Today)),
+(2, 2, 4, 'B', DATEADD(DAY, -14, @Today)),
+(3, 3, 5, 'C', DATEADD(DAY, -21, @Today)),
+(4, 4, 6, 'A', DATEADD(DAY, -3, @Today)),
+(5, 5, 7, 'B', DATEADD(DAY, -6, @Today)),
+(6, 6, 8, 'C', DATEADD(DAY, -18, @Today)),
+(7, 7, 9, 'A', DATEADD(DAY, -9, @Today)),
+(8, 8, 10, 'B', DATEADD(DAY, -20, @Today)),
+(9, 9, 11, 'C', DATEADD(DAY, -11, @Today)),
+(10, 10, 12, 'A', DATEADD(DAY, -1, @Today)),
+(1, 11, 3, 'B', DATEADD(DAY, -25, @Today)),
+(2, 12, 4, 'C', DATEADD(DAY, -10, @Today)),
+(3, 13, 5, 'A', DATEADD(DAY, -4, @Today)),
+(4, 14, 6, 'B', DATEADD(DAY, -2, @Today)),
+(5, 15, 7, 'C', DATEADD(DAY, -5, @Today)),
+(6, 16, 8, 'A', DATEADD(DAY, -13, @Today)),
+(7, 17, 9, 'B', DATEADD(DAY, -22, @Today)),
+(8, 18, 10, 'C', DATEADD(DAY, -12, @Today)),
+(9, 19, 11, 'A', DATEADD(DAY, -15, @Today)),
+(10, 20, 12, 'B', DATEADD(DAY, -19, @Today));

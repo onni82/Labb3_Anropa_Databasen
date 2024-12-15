@@ -101,7 +101,6 @@ namespace Labb3_Anropa_Databasen
             {
                 Console.WriteLine("Which role do you want to see? Type a corresponding number, or 0 to view all staff.");
                 string? roleChoice = Console.ReadLine();
-                Console.WriteLine("");
 
                 // Views all staff
                 if (roleChoice == "0")
